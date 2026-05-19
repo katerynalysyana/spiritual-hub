@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Як я працюю</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --surface: #161618;
+      --gold: #c9a86c;
+      --gold-light: #e8d5a8;
+      --text: #e8e2d9;
+      --muted: #8a8278;
+      --border: rgba(201,168,108,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,168,108,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,108,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.05;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2.5rem auto;
+      opacity: 0;
+      animation: fadeUp 1s 0.8s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      font-weight: 200;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      max-width: 400px;
+      line-height: 2;
+      opacity: 0;
+      animation: fadeUp 1s 1s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.3s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ── ADAMANT BLOCK ── */
+    .adamant {
+      border-left: 1px solid var(--gold);
+      padding: 2rem 2.5rem;
+      background: rgba(201,168,108,0.03);
+      margin: 3rem 0;
+    }
+
+    .adamant p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .adamant strong {
+      color: var(--gold-light);
+      font-weight: 400;
+    }
+
+    /* ── TOOLS GRID ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .tool-item {
+      background: var(--surface);
+      padding: 1.2rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      transition: background 0.25s, color 0.25s;
+      cursor: default;
+    }
+
+    .tool-item:hover {
+      background: rgba(201,168,108,0.07);
+      color: var(--gold-light);
+    }
+
+    .tool-item::before {
+      content: '◆';
+      font-size: 0.5rem;
+      color: var(--gold);
+      margin-right: 0.75rem;
+      vertical-align: middle;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      text-align: center;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-section .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── DECORATIVE LINE ── */
+    .line-ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .line-ornament::before,
+    .line-ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .line-ornament span {
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (max-width: 600px) {
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">Практик · Наставник · Цілитель</p>
+    <h1 class="hero-title">Як я<br/><span>працюю?</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Духовні практики &amp; цілісний підхід до зцілення</p>
+    <div class="hero-cta">
+      <a href="#about" class="btn">Дізнатись більше</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label reveal">Основний інструмент</p>
+    <h2 class="section-title reveal">Адамантовий потік</h2>
+    <div class="adamant reveal">
+      <p>
+        Інструментів, які я використовую у своїй роботі, <strong>велике множество</strong>.<br/><br/>
+        Але головним, основоположним інструментом є <strong>Адамантовий потік</strong>, до якого я прийшла через ченнелінг з Архангелами Михаїлом і Метатроном.<br/><br/>
+        Всі практики, яким я навчаю, і консультації я веду в Адамантовому потоці. Він є <strong>універсальним інструментом, універсальним променем</strong>, з яким я працюю.
+      </p>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools" style="padding-top: 0;">
+    <div class="line-ornament reveal"><span>Інші інструменти</span></div>
+    <h2 class="section-title reveal">Крім цього у мене<br/>є ще інструменти</h2>
+
+    <div class="tools-grid reveal">
+      <div class="tool-item">Радикальне прощення</div>
+      <div class="tool-item">Бодинаміка</div>
+      <div class="tool-item">Холодинаміка</div>
+      <div class="tool-item">Розстановки</div>
+      <div class="tool-item">Кармічний аналіз</div>
+      <div class="tool-item">Кармічний менеджмент</div>
+      <div class="tool-item">Таро</div>
+      <div class="tool-item">Майстерська ступінь рейкі</div>
+      <div class="tool-item">Духовна психологія</div>
+      <div class="tool-item">Регресії та зцілення часових ліній (майстер)</div>
+      <div class="tool-item">Терапія інверсивною хвилею</div>
+      <div class="tool-item">Квітка життя</div>
+      <div class="tool-item">Нейрографіка</div>
+      <div class="tool-item">Родові практики</div>
+      <div class="tool-item">Енергетичні практики</div>
+      <div class="tool-item">Біолокація</div>
+      <div class="tool-item">Авторські системи діагностики 6 нижніх тіл</div>
+      <div class="tool-item">Авторські медитації та практики</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <p class="section-label reveal">Зв'язок</p>
+    <h2 class="section-title reveal">Готові почати?</h2>
+    <p class="reveal">Напишіть мені — разом знайдемо саме те, що потрібно вам</p>
+    <a href="https://www.instagram.com/olgalysyana" target="_blank" class="btn reveal">Instagram</a>
+  </div>
+
+  <footer>
+    <a href="https://www.instagram.com/olgalysyana" target="_blank" style="color:var(--gold);text-decoration:none;letter-spacing:0.3em;font-size:0.65rem;">@olgalysyana</a>
+    <br/><br/>© 2025 · Всі права захищено
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
